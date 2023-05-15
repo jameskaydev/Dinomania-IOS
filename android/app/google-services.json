@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "488622481871",
+    "project_id": "dinomania",
+    "storage_bucket": "dinomania.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488622481871:android:095e2a5665e150af68b2ba",
+        "android_client_info": {
+          "package_name": "host.exp.exponent.dinomania"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488622481871-od40ec872aha7bk99jpad6c1mn2javhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "host.exp.exponent.dinomania",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "488622481871-1j3r85lhgvt8iqdr9kgv7frhaic2nl7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgIdm6UaGOVRTC_uKtuQWNkmxG9X7agyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488622481871-1j3r85lhgvt8iqdr9kgv7frhaic2nl7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

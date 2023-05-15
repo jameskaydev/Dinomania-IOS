@@ -1,0 +1,48 @@
+{
+  "name": "dinomania",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.1.6",
+    "@babel/runtime": "^7.20.6",
+    "@openspacelabs/react-native-zoomable-view": "^2.1.1",
+    "@react-native-firebase/app": "^17.4.2",
+    "@react-native-firebase/messaging": "^17.4.2",
+    "axios": "^1.3.4",
+    "expo": "^48.0.16",
+    "expo-auth-session": "^4.0.3",
+    "expo-cli": "^6.3.7",
+    "expo-constants": "^14.2.1",
+    "expo-device": "~5.2.1",
+    "expo-file-system": "^15.2.2",
+    "expo-modules-autolinking": "^1.2.0",
+    "expo-notifications": "~0.18.1",
+    "expo-splash-screen": "^0.18.2",
+    "expo-status-bar": "~1.4.4",
+    "firebase": "^9.21.0",
+    "googleapis": "^118.0.0",
+    "jscodeshift": "^0.13.1",
+    "native-notify": "^3.0.4",
+    "react": "18.2.0",
+    "react-native": "^0.71.7",
+    "react-native-codegen": "^0.71.5",
+    "react-native-fast-image": "^8.6.3",
+    "react-native-gesture-handler": "^2.9.0",
+    "react-native-svg": "^13.4.0",
+    "react-native-webview": "^11.26.0",
+    "react-native-youtube-iframe": "^2.2.2",
+    "svgo": "^3.0.2",
+    "uglify-es": "^3.3.9"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.8"
+  },
+  "private": true
+}

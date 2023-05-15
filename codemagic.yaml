@@ -1,0 +1,82 @@
+workflows:
+
+  react-native-ios:
+    name: React Native iOS
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    integrations:
+      app_store_connect: Dinomania prehistoric planet
+    environment:
+      ios_signing:
+        distribution_type: development
+        bundle_identifier: com.gappsy.dashboard.www.ios5f6cc69706e43kk
+      vars:
+          XCODE_WORKSPACE: "ExpoApp.xcworkspace"
+          XCODE_SCHEME: "ExpoApp"
+          BUNDLE_ID: "com.gappsy.dashboard.www.ios5f6cc69706e43kk"
+          APP_ID: 6449178488
+      node: 16.14.2
+      xcode: 13.3
+      cocoapods: default
+    triggering:
+        events:
+            - push
+            - tag
+            - pull_request
+        branch_patterns:
+            - pattern: develop
+              include: true
+              source: true
+    scripts:
+      - name: Install dependencies, Expo CLI and eject app
+        script: |
+          yarn install
+          yarn global add expo-cli
+          expo eject
+      - name: Set Info.plist values
+        script: |
+          PLIST=$FCI_BUILD_DIR/$XCODE_SCHEME/Info.plist
+          PLIST_BUDDY=/usr/libexec/PlistBuddy
+          $PLIST_BUDDY -c "Add :ITSAppUsesNonExemptEncryption bool false" $PLIST
+      - name: Install CocoaPods dependencies
+        script: |
+          cd ios && pod install
+      - name: Increment build number
+        script: |
+          cd $CM_BUILD_DIR/ios
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
+          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+      - name: Set up code signing settings on Xcode project
+        script: |
+          xcode-project use-profiles --warn-only
+      - name: Build ipa for distribution
+        script: |
+          xcode-project build-ipa \
+            --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
+    artifacts:
+        - build/ios/ipa/*.ipa
+        - /tmp/xcodebuild_logs/*.log
+        - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.app
+        - $HOME/Library/Developer/Xcode/DerivedData/**/Build/**/*.dSYM
+    publishing:
+      email:
+        recipients:
+          - jameskaydev@gmail.com
+          - chrisrob1980@me.com
+        notify:
+          success: true
+          failure: true
+      app_store_connect:
+        auth: integration
+
+        # Configuration related to TestFlight (optional)
+        # Note: This action is performed during post-processing.
+        submit_to_testflight: true
+        beta_groups: # Specify the names of beta tester groups that will get access to the build once it has passed beta review.
+          - group name 1
+          - group name 2
+
+        # Configuration related to App Store (optional)
+        # Note: This action is performed during post-processing.
+        submit_to_app_store: true

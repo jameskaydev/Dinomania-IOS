@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "Dinomania Prehistoric Planet",
+    "slug": "dinomania",
+    "version": "1.0.0",
+    "icon": "./assets/app_logo.png",
+    "package": "com.jameskay.dinomaniaprehistoricplanet",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/app_logo.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.gappsy.dashboard.www.ios5f6cc69706e43kk"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "f50b75ed-18d7-4493-b89f-ea7aed6e8712"
+      }
+    }
+  }
+}

@@ -4,12 +4,12 @@
     "slug": "dinomania",
     "version": "1.0.0",
     "icon": "./assets/app_logo.png",
-    "package": "com.jameskay.dinomaniaprehistoricplanet",
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
       "googleServicesFile": "./google-services.json",
+      "package": "com.jameskay.dinomaniaprehistoricplanet",
       "adaptiveIcon": {
         "foregroundImage": "./assets/app_logo.png",
         "backgroundColor": "#FFFFFF"

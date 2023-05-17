@@ -11,8 +11,8 @@ workflows:
         distribution_type: development
         bundle_identifier: com.gappsy.dashboard.www.ios5f6cc69706e43kk
       vars:
-          XCODE_WORKSPACE: "Dinomania.xcworkspace"
-          XCODE_SCHEME: "Dinomania"
+          XCODE_WORKSPACE: "/Users/builder/clone/ios/dinomania.xcworkspace"
+          XCODE_SCHEME: "dinomania"
           BUNDLE_ID: "com.gappsy.dashboard.www.ios5f6cc69706e43kk"
           APP_ID: 6449178488
       node: 16.14.2

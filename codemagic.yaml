@@ -11,8 +11,8 @@ workflows:
         distribution_type: development
         bundle_identifier: com.gappsy.dashboard.www.ios5f6cc69706e43kk
       vars:
-          XCODE_WORKSPACE: "ExpoApp.xcworkspace"
-          XCODE_SCHEME: "ExpoApp"
+          XCODE_WORKSPACE: "Dinomania.xcworkspace"
+          XCODE_SCHEME: "Dinomania"
           BUNDLE_ID: "com.gappsy.dashboard.www.ios5f6cc69706e43kk"
           APP_ID: 6449178488
       node: 16.14.2
@@ -49,9 +49,6 @@ workflows:
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --warn-only
-      - name: check directory existing
-        script: |
-          xcodebuild -workspace ExpoApp.xcworkspace -scheme ExpoApp
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \
@@ -66,7 +63,6 @@ workflows:
       email:
         recipients:
           - jameskaydev@gmail.com
-          - chrisrob1980@me.com
         notify:
           success: true
           failure: true

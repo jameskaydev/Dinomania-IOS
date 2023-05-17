@@ -49,6 +49,10 @@ workflows:
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --warn-only
+      - name: Log Xcode Workspace and Scheme
+        script: |
+          echo "Xcode Workspace: $XCODE_WORKSPACE"
+          echo "Xcode Scheme: $XCODE_SCHEME"
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \

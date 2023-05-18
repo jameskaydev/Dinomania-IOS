@@ -49,19 +49,10 @@ workflows:
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --warn-only
-      - name: Log Xcode Workspace and Scheme
-        script: |
-          echo "Checking iOS code signing settings..."
-          if [ "$FCI_BUILD_STEP_NAME" = "iOS Build" ]; then
-            if [ -z "$EXPONENT_APPLE_TEAM_ID" ] || [ -z "$EXPO_IOS_DIST_P12_PASSWORD" ] || [ -z "$EXPO_IOS_PROVISIONING_PROFILE_SPECIFIER" ]; then
-              echo "Error: One or more required iOS code signing environment variables are missing!"
-              echo "Please ensure that the following environment variables are set in your Codemagic project:"
-              echo "  - EXPONENT_APPLE_TEAM_ID"
-              echo "  - EXPO_IOS_DIST_P12_PASSWORD"
-              echo "  - EXPO_IOS_PROVISIONING_PROFILE_SPECIFIER"
-              exit 1
-            fi
-          fi
+      - name: Set up code signing settings on Xcode project 
+        script: | 
+        xcode-project use-profiles --warn-only xcode-project set-script-based-dependencies --based-on-dependency-analysis=false
+        --script-phases Start Packager,Bundle React Native code and images,[CP-User] [RNFB] Core Configuration,[CP-User] Generate app.config for prebuilt Constants.manifest
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \

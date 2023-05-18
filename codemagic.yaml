@@ -27,35 +27,46 @@ workflows:
             - pattern: develop
               include: true
               source: true
-    scripts:
-      - name: Install dependencies, Expo CLI and eject app
-        script: |
-          yarn install
-          yarn global add expo-cli
-          expo eject
-      - name: Set Info.plist values
-        script: |
-          PLIST=$FCI_BUILD_DIR/$XCODE_SCHEME/Info.plist
-          PLIST_BUDDY=/usr/libexec/PlistBuddy
-          $PLIST_BUDDY -c "Add :ITSAppUsesNonExemptEncryption bool false" $PLIST
-      - name: Install CocoaPods dependencies
-        script: |
-          cd ios && pod install
-      - name: Increment build number
-        script: |
-          cd $CM_BUILD_DIR/ios
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
-          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles --warn-only
-          xcode-project set-script-based-dependencies --based-on-dependency-analysis=false 
-          --script-phases Start Packager,Bundle React Native code and images,[CP-User] [RNFB] Core Configuration,[CP-User] Generate app.config for prebuilt Constants.manifest
-      - name: Build ipa for distribution
-        script: |
-          xcode-project build-ipa \
-            --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME"
+        scripts:
+          - name: Install dependencies, Expo CLI and eject app
+            script: |
+              yarn install
+              yarn global add expo-cli
+              expo eject
+            outputs:
+              - node_modules/
+              - ios/Pods/
+          - name: Set Info.plist values
+            script: |
+              PLIST=$FCI_BUILD_DIR/$XCODE_SCHEME/Info.plist
+              PLIST_BUDDY=/usr/libexec/PlistBuddy
+              $PLIST_BUDDY -c "Add :ITSAppUsesNonExemptEncryption bool false" $PLIST
+            outputs:
+              - $FCI_BUILD_DIR/$XCODE_SCHEME/Info.plist
+          - name: Install CocoaPods dependencies
+            script: |
+              cd ios && pod install
+            outputs:
+              - ios/Pods/
+          - name: Increment build number
+            script: |
+              cd $CM_BUILD_DIR/ios
+              LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
+              agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+            outputs:
+              - $CM_BUILD_DIR/ios
+          - name: Set up code signing settings on Xcode project
+            script: |
+              xcode-project use-profiles --warn-only
+            outputs:
+              - $CM_BUILD_DIR/ios
+          - name: Build ipa for distribution
+            script: |
+              xcode-project build-ipa \
+                --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
+                --scheme "$XCODE_SCHEME"
+            outputs:
+              - $CM_BUILD_DIR/ios/build/
     artifacts:
         - build/ios/ipa/*.ipa
         - /tmp/xcodebuild_logs/*.log

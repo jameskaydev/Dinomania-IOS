@@ -41,13 +41,27 @@ workflows:
       - name: Install CocoaPods dependencies
         script: |
           cd ios && pod install
+      - name: Increment build number
+        script: |
+          cd $CM_BUILD_DIR/ios
+          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
+          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --warn-only
       - name: Log Xcode Workspace and Scheme
         script: |
-          echo "Xcode Workspace: $XCODE_WORKSPACE"
-          echo "Xcode Scheme: $XCODE_SCHEME"
+          echo "Checking iOS code signing settings..."
+          if [ "$FCI_BUILD_STEP_NAME" = "iOS Build" ]; then
+            if [ -z "$EXPONENT_APPLE_TEAM_ID" ] || [ -z "$EXPO_IOS_DIST_P12_PASSWORD" ] || [ -z "$EXPO_IOS_PROVISIONING_PROFILE_SPECIFIER" ]; then
+              echo "Error: One or more required iOS code signing environment variables are missing!"
+              echo "Please ensure that the following environment variables are set in your Codemagic project:"
+              echo "  - EXPONENT_APPLE_TEAM_ID"
+              echo "  - EXPO_IOS_DIST_P12_PASSWORD"
+              echo "  - EXPO_IOS_PROVISIONING_PROFILE_SPECIFIER"
+              exit 1
+            fi
+          fi
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \

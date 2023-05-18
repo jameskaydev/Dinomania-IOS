@@ -49,10 +49,8 @@ workflows:
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --warn-only
-      - name: Set up code signing settings on Xcode project 
-        script: | 
-        xcode-project use-profiles --warn-only xcode-project set-script-based-dependencies --based-on-dependency-analysis=false
-        --script-phases Start Packager,Bundle React Native code and images,[CP-User] [RNFB] Core Configuration,[CP-User] Generate app.config for prebuilt Constants.manifest
+          xcode-project set-script-based-dependencies --based-on-dependency-analysis=false 
+          --script-phases Start Packager,Bundle React Native code and images,[CP-User] [RNFB] Core Configuration,[CP-User] Generate app.config for prebuilt Constants.manifest
       - name: Build ipa for distribution
         script: |
           xcode-project build-ipa \

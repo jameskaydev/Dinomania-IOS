@@ -43,7 +43,7 @@ workflows:
           cd ios && pod install
       - name: Update CocoaPods
         script: |
-          pod update
+          cd ios && pod update
       - name: Increment build number
         script: |
           cd $CM_BUILD_DIR/ios

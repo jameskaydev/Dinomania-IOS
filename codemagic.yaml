@@ -54,9 +54,8 @@ workflows:
           xcode-project use-profiles --warn-only
       - name: Build ipa for distribution
         script: |
-          xcode-project build-ipa --archive-flags="-destination 'generic/platform=iOS'"\
-            --workspace "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE" \
-            --scheme "$XCODE_SCHEME"
+          xcodebuild -exportArchive -archivePath "$CM_BUILD_DIR/ios/$XCODE_WORKSPACE.xcarchive" \
+          -exportOptionsPlist "$CM_BUILD_DIR/ios/exportOptions.plist"
     artifacts:
         - build/ios/ipa/*.ipa
         - /tmp/xcodebuild_logs/*.log

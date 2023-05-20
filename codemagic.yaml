@@ -46,9 +46,9 @@ workflows:
           cd ios && pod update
       - name: Increment build number
         script: |
-          cd $CM_BUILD_DIR/ios
-          LATEST_BUILD_NUMBER=$(app-store-connect get-latest-app-store-build-number "$APP_ID")
-          agvtool new-version -all $(($LATEST_BUILD_NUMBER + 1))
+          build_number=$(curl -s "https://itunes.apple.com/lookup?bundleId=${BUNDLE_ID}" | awk '/"version":"[0-9.]+"/{gsub(/.*:/,"",$0);gsub(/,/,"",$0);print $0}')
+          build_number=$((build_number + 1))
+          curl -i -X POST -H "Content-Type: application/json" -d '{"value":"'${build_number}'"}' -H "Authorization: Bearer $APP_STORE_CONNECT_API_KEY" "https://api.appstoreconnect.apple.com/v1/builds/$CM_BUILD_NUMBER/relationships/app" 
       - name: Set up code signing settings on Xcode project
         script: |
           xcode-project use-profiles --warn-only

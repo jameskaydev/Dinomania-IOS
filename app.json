@@ -10,13 +10,15 @@
     "android": {
       "googleServicesFile": "./google-services.json",
       "package": "com.jameskay.dinomaniaprehistoricplanet",
+      "icon": "./assets/app_logo.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/app_logo.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "ios": {
-      "bundleIdentifier": "com.gappsy.dashboard.www.ios5f6cc69706e43kk"
+      "bundleIdentifier": "com.gappsy.dashboard.www.ios5f6cc69706e43kk",
+      "icon": "./assets/app_logo.png"
     },
     "extra": {
       "eas": {

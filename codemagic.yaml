@@ -10,14 +10,13 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.gappsy.dashboard.www.ios5f6cc69706e43kk
-        deployment_target: 16.1
       vars:
           XCODE_WORKSPACE: "dinomania.xcworkspace"
           XCODE_SCHEME: "dinomania"
           BUNDLE_ID: "com.gappsy.dashboard.www.ios5f6cc69706e43kk"
           APP_ID: 6449178488
       node: 16.14.2
-      xcode: 14.0
+      xcode: 14.1
       cocoapods: default
     triggering:
         events:

@@ -8,7 +8,7 @@ workflows:
       app_store_connect: Dinomania prehistoric planet
     environment:
       ios_signing:
-        distribution_type: development
+        distribution_type: distribution
         bundle_identifier: com.gappsy.dashboard.www.ios5f6cc69706e43kk
       vars:
           XCODE_WORKSPACE: "dinomania.xcworkspace"

@@ -73,12 +73,6 @@ export default function App() {
       {showIntro ? null : (
         <View style={styles.container}>
           <View style={{ flex: 1 }}>
-            {showDirectory ? (
-              <Directory
-                handlePress={handleDinosaurPress}
-                showTheDirectory={showTheDirectory}
-              />
-            ) : null}
             <Map
               onPress={handleDinosaurPress}
               showTheDirectory={showTheDirectory}
@@ -93,7 +87,6 @@ export default function App() {
                 handler={handleDinosaurPress}
                 cleanSearch={cleanSearchArea}
                 search={search}
-                style={styles.search}
               />
             )}
             {selectedDinosaur && (
@@ -106,6 +99,12 @@ export default function App() {
           </View>
         </View>
       )}
+      {showDirectory ? (
+        <Directory
+          handlePress={handleDinosaurPress}
+          showTheDirectory={showTheDirectory}
+        />
+      ) : null}
     </>
   );
 }
@@ -117,7 +116,6 @@ const styles = StyleSheet.create({
   introcontainer: {
     flex: 1,
     height: "100%",
-    // width: '100%'
   },
   text: {
     marginTop: 100,

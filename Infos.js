@@ -202,9 +202,9 @@ const styles = StyleSheet.create({
   infosName: {
     color: "#fff",
     fontSize: 18,
-    width: '25%',
+    width: '32%',
     paddingLeft: 30,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   infosValue: {
     color: "#fff",

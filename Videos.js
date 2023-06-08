@@ -103,6 +103,19 @@ const Videos = ({ showTheVideos }) => {
           visible={modalVisible}
           onRequestClose={() => setModalVisible(false)}
         >
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              alignItems: "flex-end",
+              position: "absolute",
+              zIndex: 999999,
+              right: 20,
+              top: 60,
+            }}
+            onPress={() => setModalVisible(false)}
+          >
+            <Text style={{ fontSize: 20 }} >❌</Text>
+          </TouchableOpacity>
           <WebView
             source={{
               uri: selectedVideo

@@ -60,7 +60,7 @@ const Map = ({ onPress, showMap, showTheMap }) => {
           position: "absolute",
           zIndex: 999999,
           right: 20,
-          top: 80,
+          top: 100,
         }}
         onPress={showTheMap}
       >

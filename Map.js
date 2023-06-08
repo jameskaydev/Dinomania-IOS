@@ -85,6 +85,9 @@ const Map = ({ onPress, showMap, showTheMap }) => {
             width={width * 4}
             height={height}
             uri="http://89.117.36.161/dark_map1.svg"
+            style={{
+              marginTop: 50
+            }}
           />
           {dinosaurs.map((dinosaur) => (
             <View
@@ -92,7 +95,7 @@ const Map = ({ onPress, showMap, showTheMap }) => {
               style={{
                 position: "absolute",
                 left: width * 4 * (dinosaur.locationx / 100) - 8,
-                top: height * (dinosaur.locationy / 100) - 20,
+                top: height * (dinosaur.locationy / 100),
               }}
             >
               <Text style={styles.tooltip}>
@@ -102,7 +105,6 @@ const Map = ({ onPress, showMap, showTheMap }) => {
                 width="30"
                 height="30"
                 onPress={() => handleDinosaurPress(dinosaur)}
-                style={{ marginTop: -6 }}
               >
                 <Circle cx="10" cy="10" r={6 * dot} fill="white" />
                 <Circle cx="10" cy="10" r={4 * dot} fill="yellow" />

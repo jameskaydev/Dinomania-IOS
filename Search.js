@@ -28,7 +28,7 @@ const Search = ({ handleSearch, searchResults, handler, cleanSearch, search }) =
 
 const styles = StyleSheet.create({
   searchContainer: {
-    paddingTop: 20,
+    paddingTop: 50,
     backgroundColor: '#181818',
     position: 'absolute',
     top: 0,

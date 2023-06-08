@@ -46,7 +46,7 @@ workflows:
           cd ios && pod update
       - name: Increment build number
         script: |
-          build_number=2
+          build_number=3
           curl -i -X POST -H "Content-Type: application/json" -d '{"value":"'${build_number}'"}' -H "Authorization: Bearer $APP_STORE_CONNECT_API_KEY" "https://api.appstoreconnect.apple.com/v1/builds/$CM_BUILD_NUMBER/relationships/app" 
       - name: Set up code signing settings on Xcode project
         script: |

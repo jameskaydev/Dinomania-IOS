@@ -7,12 +7,13 @@ import {
   ScrollView,
   Dimensions,
   ActivityIndicator,
+  TouchableOpacity,
 } from "react-native";
 import { Circle, Svg, SvgUri } from "react-native-svg";
 import { ReactNativeZoomableView } from "@openspacelabs/react-native-zoomable-view";
 import axios from "axios";
 
-const Map = ({ onPress, showTheDirectory, showTheVideos, showD, showV }) => {
+const Map = ({ onPress, showMap, showTheMap }) => {
   const [dinosaurs, setDinosaurs] = useState([]);
   const { width, height } = Dimensions.get("window");
   const [imageWidth, setImageWidth] = useState(null);
@@ -44,18 +45,28 @@ const Map = ({ onPress, showTheDirectory, showTheVideos, showD, showV }) => {
     onPress(dinosaur);
   };
 
-  const handleDirectory = () => {
-    showTheDirectory();
-  };
-
-  const handleVideos = () => {
-    showTheVideos();
-  };
-
   return (
     <View
-      style={{ height: "100%", backgroundColor: "#181818", paddingTop: 40 }}
+      style={{
+        height: showMap ? "100%" : 0,
+        backgroundColor: "#181818",
+        paddingTop: 40,
+      }}
     >
+      <TouchableOpacity
+        style={{
+          flex: 1,
+          alignItems: "flex-end",
+          position: "absolute",
+          zIndex: 999999,
+          right: 20,
+          top: 80,
+        }}
+        onPress={showTheMap}
+      >
+        <Image source={require("./assets/back30.png")} />
+      </TouchableOpacity>
+
       <ScrollView horizontal={true} style={{ height: height }}>
         <ReactNativeZoomableView
           maxZoom={6}
@@ -101,31 +112,6 @@ const Map = ({ onPress, showTheDirectory, showTheVideos, showD, showV }) => {
           ))}
         </ReactNativeZoomableView>
       </ScrollView>
-      <View
-        style={{
-          position: "absolute",
-          top: height - (imageHeight - height + 20),
-          right: 10,
-        }}
-      >
-        <View style={styles.bookicon}>
-          <SvgUri
-            width={35}
-            height={35}
-            uri="http://89.117.36.161/w_book.svg"
-            onPress={() => handleDirectory()}
-          />
-        </View>
-        <View style={{ marginTop: 6 }}></View>
-        <View style={styles.bookicon}>
-          <SvgUri
-            width={35}
-            height={35}
-            uri="http://89.117.36.161/w_youtube.svg"
-            onPress={() => handleVideos()}
-          />
-        </View>
-      </View>
     </View>
   );
 };

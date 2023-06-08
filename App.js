@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import registerNNPushToken from "native-notify";
 import { StyleSheet, SafeAreaView, View } from "react-native";
 import Map from "./Map";
+import Home from "./Home";
 import Infos from "./Infos";
 import Search from "./Search";
 import AppIntro from "./AppIntro";
@@ -17,6 +18,7 @@ export default function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [showDirectory, setShowDirectory] = useState(false);
   const [showVideos, setShowVideos] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const timeout = useRef(null);
 
   const handleIntroFinish = () => {
@@ -66,21 +68,33 @@ export default function App() {
     setShowVideos(!showVideos);
   };
 
+  const showTheMap = () => {
+    setShowMap(!showMap);
+  };
+
   return (
     <>
       {showIntro && <AppIntro onFinish={handleIntroFinish} />}
-      {showVideos && <Videos showTheVideos={showTheVideos} />}
+      {showIntro
+        ? null
+        : !showMap &&
+          !showDirectory &&
+          !showVideos && (
+            <Home
+              showTheMap={showTheMap}
+              showTheDirectory={showTheDirectory}
+              showTheVideos={showTheVideos}
+            />
+          )}
       {showIntro ? null : (
         <View style={styles.container}>
           <View style={{ flex: 1 }}>
             <Map
               onPress={handleDinosaurPress}
-              showTheDirectory={showTheDirectory}
-              showTheVideos={showTheVideos}
-              showD={showDirectory}
-              showV={showVideos}
+              showMap={showMap}
+              showTheMap={showTheMap}
             />
-            {showIntro ? null : (
+            {showMap && (
               <Search
                 handleSearch={handleSearchText}
                 searchResults={searchResults}
@@ -105,6 +119,8 @@ export default function App() {
           showTheDirectory={showTheDirectory}
         />
       ) : null}
+
+      {showVideos && <Videos showTheVideos={showTheVideos} />}
     </>
   );
 }
